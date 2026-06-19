@@ -1,0 +1,8 @@
+use Test;
+use JSON::Collector;
+
+plan 1;
+
+pass "it compiled";
+
+# vim: expandtab shiftwidth=4

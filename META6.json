@@ -1,0 +1,25 @@
+{
+  "auth": "zef:lizmat",
+  "authors": [
+    "Elizabeth Mattijsen"
+  ],
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "blah blah blah",
+  "license": "Artistic-2.0",
+  "name": "JSON::Collector",
+  "perl": "6.d",
+  "provides": {
+    "JSON::Collector": "lib/JSON/Collector.rakumod"
+  },
+  "resources": [
+  ],
+  "source-url": "https://codeberg.org/lizmat/JSON-Collector.git",
+  "tags": [
+  ],
+  "test-depends": [
+  ],
+  "version": "0.0.1"
+}
