@@ -106,6 +106,63 @@ The `unprocessed` method produces a `Seq` of `JSON::Collector::Item` objects of 
 JSON::Collector::Item
 =====================
 
+The `JSON::Collector::Item` class encapsulates on item that was previously stored. It acts as closes as possible to the original data stored, with some additional methods that can be invoked.
+
+collector
+---------
+
+The `JSON::Collector` object that created this `JSON::Collector::Item` object.
+
+IO
+--
+
+The `IO::Path` object of the data.
+
+data
+----
+
+The actual data structure that was stored. It's generally not needed to call this method, as the object itself will act as the data as much as possible.
+
+mark-as-processed
+-----------------
+
+```raku
+for $collector.unprocessed -> \item {
+    # process JSON data
+    item.mark-as-processed($type);
+}
+```
+
+The `mark-as-processed` method will mark the data that was previously stored as processed.
+
+Depending on the value specified with `done` in the `JSON::Collector` object, it will do one of three things:
+
+### if done is `Nil`
+
+Then this call is equivalent to calling the `discard` method, as in removing the item from the "todo" directory.
+
+### if done is a `Callable`
+
+Then the `Callable` will be called with the `JSON::Collector::Item` object as the only positional argument. If the return value is `True`, then the object will be removed from the "todo" directory, otherwise it will be kept there.
+
+### if done is an `IO::Path`
+
+The optional type indication (which defaults to the empty string) will be used as the name of a subdirectory in the "done" directory in which the data will ultimately be stored. Defaults to the empty string, which means no subdirectory.
+
+Then the JSON file in the "todo" directory (or "todo/$type") will be moved to a sub-directory YYYY/YYYY-MM-DD of that directory, using the current date.
+
+discard
+-------
+
+```raku
+for $collector.unprocessed -> \item {
+    # process JSON data
+    item.discard;
+}
+```
+
+Discards the item from the "todo" directory.
+
 AUTHOR
 ======
 

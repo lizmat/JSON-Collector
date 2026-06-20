@@ -1,7 +1,22 @@
+use v6.*;  # for nano
+
 use Test;
 use JSON::Collector;
 
 plan 1;
+
+my $todo := $*TMPDIR.add(nano);
+$todo.mkdir;
+my $done := $*TMPDIR.add(nano);
+$done.mkdir;
+
+my $c := JSON::Collector.new(:$todo, :$done);
+$c.store([1,2,3,4]);
+
+for $c.unprocessed -> \data {
+    dd data;
+    data.mark-as-processed("zippo");
+}
 
 pass "it compiled";
 

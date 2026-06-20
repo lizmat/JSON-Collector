@@ -25,10 +25,13 @@ class JSON::Collector::Item {
         my $done = $!collector.done;
         if $done ~~ IO {
             my $io = $type ?? $done.add($type) !! $done;
-            $io = $io.add(Date.today.yyyy-mm-dd);
+            my $date = Date.today;
+            $io = $io.add($date.year).add($date.yyyy-mm-dd);
             $io.mkdir;
 
             $io = $io.add(nano);
+            # slurp and spurt instead of rename to avoid any cross-filesystem
+            # issues
             return False unless $io.spurt($!IO.slurp);
 
             my $proc = run 'gzip', '-9', $io.absolute;
@@ -83,14 +86,6 @@ class JSON::Collector {
             )
         }
     }
-}
-
-my $c := JSON::Collector.new;
-$c.store([1,2,3,4]);
-
-for $c.unprocessed -> \data {
-    dd data;
-    data.mark-as-processed("zippo");
 }
 
 # vim: expandtab shiftwidth=4

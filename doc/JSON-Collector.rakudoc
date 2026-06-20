@@ -113,6 +113,74 @@ objects of data that has not yet been processed yet.
 
 =head1 JSON::Collector::Item
 
+The C<JSON::Collector::Item> class encapsulates on item that was previously
+stored.  It acts as closes as possible to the original data stored, with
+some additional methods that can be invoked.
+
+=head2 collector
+
+The C<JSON::Collector> object that created this C<JSON::Collector::Item>
+object.
+
+=head2 IO
+
+The C<IO::Path> object of the data.
+
+=head2 data
+
+The actual data structure that was stored.  It's generally not needed to
+call this method, as the object itself will act as the data as much as
+possible.
+
+=head2 mark-as-processed
+
+=begin code :lang<raku>
+for $collector.unprocessed -> \item {
+    # process JSON data
+    item.mark-as-processed($type);
+}
+=end code
+
+The C<mark-as-processed> method will mark the data that was previously
+stored as processed.
+
+Depending on the value specified with C<done> in the C<JSON::Collector>
+object, it will do one of three things:
+
+=head3 if done is C<Nil>
+
+Then this call is equivalent to calling the C<discard> method, as in
+removing the item from the "todo" directory.
+
+=head3 if done is a C<Callable>
+
+Then the C<Callable> will be called with the C<JSON::Collector::Item>
+object as the only positional argument.  If the return value is C<True>,
+then the object will be removed from the "todo" directory, otherwise
+it will be kept there.
+
+=head3 if done is an C<IO::Path>
+
+The optional type indication (which defaults to the empty string) will
+be used as the name of a subdirectory in the "done" directory in which
+the data will ultimately be stored.  Defaults to the empty string,
+which means no subdirectory.
+
+Then the JSON file in the "todo" directory (or "todo/$type") will be
+moved to a sub-directory YYYY/YYYY-MM-DD of that directory, using the
+current date.
+
+=head2 discard
+
+=begin code :lang<raku>
+for $collector.unprocessed -> \item {
+    # process JSON data
+    item.discard;
+}
+=end code
+
+Discards the item from the "todo" directory.
+
 =head1 AUTHOR
 
 Elizabeth Mattijsen <liz@raku.rocks>
