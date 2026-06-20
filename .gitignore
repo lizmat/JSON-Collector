@@ -1,2 +1,5 @@
 .precomp/
 /JSON-Collector-*
+todo/
+done/
+*.rakucov

@@ -5,19 +5,31 @@
   ],
   "build-depends": [
   ],
-  "depends": [
-  ],
-  "description": "blah blah blah",
+  "depends": {
+    "runtime": {
+      "requires": [
+        "JSON::Fast:ver<0.20.1+>:auth<zef:timo>"
+      ]
+    }
+  },
+  "description": "Collect and process JSON",
   "license": "Artistic-2.0",
   "name": "JSON::Collector",
-  "perl": "6.d",
   "provides": {
     "JSON::Collector": "lib/JSON/Collector.rakumod"
   },
+  "raku": "6.d",
   "resources": [
   ],
   "source-url": "https://codeberg.org/lizmat/JSON-Collector.git",
+  "support": {
+    "bugtracker": "https://codeberg.org/lizmat/JSON-Collector/issues",
+    "email": "liz@raku.rocks",
+    "source": "https://codeberg.org/lizmat/JSON-Collector.git"
+  },
   "tags": [
+    "JSON",
+    "WEBHOOK"
   ],
   "test-depends": [
   ],
