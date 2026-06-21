@@ -99,6 +99,10 @@ these same named arguments in the call to C<store>);
 $collector.store(data, :!pretty);
 =end code
 
+The C<store> method either returns an C<IO::Path> object of the
+file that was created to store the data, or C<Nil> if something
+went wrong.
+
 =head2 unprocessed
 
 =begin code :lang<raku>
@@ -124,7 +128,8 @@ object.
 
 =head2 IO
 
-The C<IO::Path> object of the data.
+The C<IO::Path> object of the data.  After having been successfully
+processed (with C<mark-as-processed>), then it contains the 
 
 =head2 data
 
@@ -180,6 +185,19 @@ for $collector.unprocessed -> \item {
 =end code
 
 Discards the item from the "todo" directory.
+
+=head1 THEORY OF OPERATION
+
+Whenever some data is stored (and it's not JSON already) it is converted
+to JSON.  Then the JSON is spurted to a file with as basename the
+current nanosecond value, with the extension "tmp".  Once the write is
+completed, the file is (atomically, presumably) renamed to not have any
+extension.
+
+This means that many threads or processes can store date asynchronously
+in the same collection.  When it comes to processing, it is assumed
+that only a B<single> process/thread will be calling the C<unprocessed>
+method.  The actual processing of the items I<may> me multi-threaded.
 
 =head1 AUTHOR
 

@@ -3,21 +3,55 @@ use v6.*;  # for nano
 use Test;
 use JSON::Collector;
 
-plan 1;
+plan 9;
 
-my $todo := $*TMPDIR.add(nano);
+my $todo = $*TMPDIR.add(nano);
 $todo.mkdir;
-my $done := $*TMPDIR.add(nano);
+my $done = $*TMPDIR.add(nano);
 $done.mkdir;
 
-my $c := JSON::Collector.new(:$todo, :$done);
-$c.store([1,2,3,4]);
+my $c  = JSON::Collector.new(:$todo, :$done);
+my $io = $c.store([1,2,3,4]);
+isa-ok $io, IO::Path, 'was the store successful';
+is $io.slurp, '[
+  1,
+  2,
+  3,
+  4
+]', 'is the data stored as expected';
+my $size = $io.s;
 
+my $date = Date.today;
 for $c.unprocessed -> \data {
-    dd data;
     data.mark-as-processed("zippo");
 }
 
-pass "it compiled";
+nok $io.e, 'was the file removed from "todo"';
+my $final = $done
+ .add("zippo")
+ .add($date.year)
+ .add($date.yyyy-mm-dd)
+ .add($io.basename)
+ .extension('gz');
+
+ok $final.e, 'was the file transferred to the expected location';
+
+$io = $c.store([]);
+ok $io.e, 'Did it actually store again';
+my @unprocessed = $c.unprocessed;
+is @unprocessed.elems, 1, 'do we have one unprocessed item';
+
+ok @unprocessed.head.discard, 'was discarding successful';
+
+# cleanup
+$todo.rmdir;
+$final.unlink;
+repeat {
+    $final = $final.parent;
+    $final.rmdir;
+} until $final eq $done;
+
+nok $todo.e, "todo directory removed";
+nok $done.e, "done directory removed";
 
 # vim: expandtab shiftwidth=4

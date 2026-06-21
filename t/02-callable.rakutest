@@ -1,0 +1,32 @@
+use v6.*;  # for nano
+
+use Test;
+use JSON::Collector;
+
+plan 5;
+
+my $todo = $*TMPDIR.add(nano);
+$todo.mkdir;
+my $done = { isa-ok $_, JSON::Collector::Item, 'did we get an item' }
+
+my $c  = JSON::Collector.new(:$todo, :$done);
+my $io = $c.store([1,2,3,4]);
+isa-ok $io, IO::Path, 'was the store successful';
+is $io.slurp, '[
+  1,
+  2,
+  3,
+  4
+]', 'is the data stored as expected';
+
+for $c.unprocessed -> \data {
+    data.mark-as-processed("zippo");
+}
+nok $io.e, 'was the file removed from "todo"';
+
+# cleanup
+$todo.rmdir;
+
+nok $todo.e, "todo directory removed";
+
+# vim: expandtab shiftwidth=4

@@ -91,6 +91,8 @@ In any other case, the given data will be converted to JSON with the `pretty`, `
 $collector.store(data, :!pretty);
 ```
 
+The `store` method either returns an `IO::Path` object of the file that was created to store the data, or `Nil` if something went wrong.
+
 unprocessed
 -----------
 
@@ -116,7 +118,7 @@ The `JSON::Collector` object that created this `JSON::Collector::Item` object.
 IO
 --
 
-The `IO::Path` object of the data.
+The `IO::Path` object of the data. After having been successfully processed (with `mark-as-processed`), then it contains the 
 
 data
 ----
@@ -162,6 +164,13 @@ for $collector.unprocessed -> \item {
 ```
 
 Discards the item from the "todo" directory.
+
+THEORY OF OPERATION
+===================
+
+Whenever some data is stored (and it's not JSON already) it is converted to JSON. Then the JSON is spurted to a file with as basename the current nanosecond value, with the extension "tmp". Once the write is completed, the file is (atomically, presumably) renamed to not have any extension.
+
+This means that many threads or processes can store date asynchronously in the same collection. When it comes to processing, it is assumed that only a **single** process/thread will be calling the `unprocessed` method. The actual processing of the items *may* me multi-threaded.
 
 AUTHOR
 ======
