@@ -1,5 +1,4 @@
 .precomp/
 /JSON-Collector-*
-todo/
-done/
+/releases
 *.rakucov
