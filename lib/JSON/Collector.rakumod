@@ -84,9 +84,9 @@ class JSON::Collector {
         Nil
     }
     multi method store(JSON::Collector:D: Any:D \data --> IO::Path:D) {
-        self.store(to-json(
+        self.store($_) with to-json(
           data, :$!pretty, :$!spacing, :$!sorted-keys, |%_
-        ))
+        )
     }
 
     method unprocessed(JSON::Collector:D: --> Seq:D) {

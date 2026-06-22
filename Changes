@@ -2,5 +2,9 @@ Revision history for JSON::Collector
 
 {{$NEXT}}
 
+0.0.2  2026-06-22T21:28:48+02:00
+    - Make sure data structures that could not be JSON-ified
+      don't leave dummy entries in the "todo" directory
+
 0.0.1  2026-06-22T19:13:37+02:00
     - Initial version
