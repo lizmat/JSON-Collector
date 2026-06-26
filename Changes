@@ -1,6 +1,7 @@
 Revision history for JSON::Collector
 
 {{$NEXT}}
+foo
 
 0.0.2  2026-06-22T21:28:48+02:00
     - Make sure data structures that could not be JSON-ified
