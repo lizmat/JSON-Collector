@@ -3,7 +3,10 @@ use v6.*;  # for nano
 use Test;
 use JSON::Collector;
 
-plan 9;
+plan 11;
+
+isa-ok MY::<&from-json>, Sub, 'was from-json re-exported';
+isa-ok MY::<&to-json>,   Sub, 'was to-json re-exported';
 
 my $todo = $*TMPDIR.add(nano);
 $todo.mkdir;

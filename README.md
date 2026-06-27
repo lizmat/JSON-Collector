@@ -172,12 +172,17 @@ Whenever some data is stored (and it's not JSON already) it is converted to JSON
 
 This means that many threads or processes can store date asynchronously in the same collection. When it comes to processing, it is assumed that only a **single** process/thread will be calling the `unprocessed` method. The actual processing of the items *may* me multi-threaded.
 
+EXPORTED SUBROUTINES
+====================
+
+The `from-json` and `to-json` subroutines from `JSON::Fast` are re-exported for convenience.
+
 AUTHOR
 ======
 
 Elizabeth Mattijsen <liz@raku.rocks>
 
-Source can be located at: https://codeberg.org/lizmat/actions . Comments and Pull Requests are welcome.
+Source can be located at: https://codeberg.org/lizmat/JSON-Collector . Comments and Pull Requests are welcome.
 
 If you like this module, or what I'm doing more generally, committing to a [small sponsorship](https://github.com/sponsors/lizmat/) would mean a great deal to me!
 

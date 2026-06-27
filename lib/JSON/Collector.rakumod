@@ -98,4 +98,10 @@ class JSON::Collector {
     }
 }
 
+#- EXPORT ----------------------------------------------------------------------
+
+my sub EXPORT() {
+    BEGIN Map.new('&from-json' => &from-json, '&to-json' => &to-json)
+}
+
 # vim: expandtab shiftwidth=4
