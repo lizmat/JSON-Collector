@@ -9,29 +9,25 @@ class JSON::Collector::Item {
     has $.collector is built(:bind);
     has $.IO        is built(:bind);
     has $.data      is built(:bind) handles <
-      AT-KEY
-      AT-POS
-      iterator
-      keys
-      raku
-      values
+      AT-KEY AT-POS iterator keys raku values
     >;
 
     method discard(JSON::Collector::Item:D:) {
         $!IO.unlink
     }
 
-    method mark-as-processed(JSON::Collector::Item:D: Str() $type = "") {
+    method mark-as-processed(JSON::Collector::Item:D: *@dirs) {
         my $old  = $!IO;
 
         my $done = $!collector.done;
         if $done ~~ IO {
             my $date = Date.today;
-            my $new  = $type ?? $done.add($type) !! $done;
-            $new = $new.add($date.year).add($date.yyyy-mm-dd);
-            $new.mkdir;
+            @dirs.append($date.year, $date.yyyy-mm-dd);
 
-            $new = $new.add($old.basename);
+            my $dir = $done.add(@dirs);
+            $dir.mkdir;
+
+            my $new = $dir.add($old.basename);
             # slurp and spurt instead of rename to avoid any cross-filesystem
             # issues
             return False unless $new.spurt($old.slurp);
@@ -53,20 +49,27 @@ class JSON::Collector::Item {
 # The actual collecting logic
 
 class JSON::Collector {
-    has IO() $.todo          is built(:bind) = "todo".IO;
-    has      $.done          is built(:bind) = "done".IO;
-    has Bool $.pretty        is built(:bind) = True;
-    has Int  $.spacing       is built(:bind) = 2;
-    has      $.sorted-keys   is built(:bind) = True;
+    has IO() $.todo        = "todo".IO;
+    has      $.done        = "done".IO;
+    has Bool $.pretty      = True;
+    has Int  $.spacing     = 2;
+    has      $.sorted-keys = True;
 
     submethod TWEAK(--> Nil) {
         my @problems;
+
         @problems.push("$!todo.absolute() is not a directory")
           unless $!todo.d;
-        @problems.push("Don't know how to handle processed items")
-          unless ($!done ~~ IO && $!done.d)
-            || $!done ~~ Callable
-            || $!done =:= Nil;
+
+        if $!done ~~ IO {
+            @problems.push("$!done.absolute() is not a directory")
+              unless $!done.d;
+        }
+        else {
+            @problems.push("Don't know how to handle processed items")
+              unless $!done ~~ Callable
+                  || $!done =:= Nil;
+        }
 
         die "Found the following issues:\n  @problems.join("\n  ")"
           if @problems;

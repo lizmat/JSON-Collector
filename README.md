@@ -149,7 +149,7 @@ Then the `Callable` will be called with the `JSON::Collector::Item` object as th
 
 ### if done is an `IO::Path`
 
-The optional type indication (which defaults to the empty string) will be used as the name of a subdirectory in the "done" directory in which the data will ultimately be stored. Defaults to the empty string, which means no subdirectory.
+The optional type indication (which defaults to none) will be used as the name(s) of subdirectories in the "done" directory in which the data will ultimately be stored.
 
 Then the JSON file in the "todo" directory (or "todo/$type") will be moved to a sub-directory YYYY/YYYY-MM-DD of that directory, using the current date.
 

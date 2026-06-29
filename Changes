@@ -2,6 +2,11 @@ Revision history for JSON::Collector
 
 {{$NEXT}}
 
+0.0.4  2026-06-29T11:06:20+02:00
+    - Allow multiple "types" to be specified for
+      categorization of processed events in more
+      directories
+
 0.0.3  2026-06-27T13:24:41+02:00
     - Re-export from-json and to-json subroutines from
       JSON::Fast for convenience
