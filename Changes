@@ -2,6 +2,9 @@ Revision history for JSON::Collector
 
 {{$NEXT}}
 
+0.0.5  2026-09-17T19:26:47+02:00
+    - Up dependency to ready for RakuAST
+
 0.0.4  2026-06-29T11:06:20+02:00
     - Allow multiple "types" to be specified for
       categorization of processed events in more

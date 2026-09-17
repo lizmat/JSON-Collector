@@ -4,7 +4,7 @@
   "specVersion": "1.6",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-06-29T09:06:54+00:00",
+    "timestamp": "2026-09-17T17:27:22+00:00",
     "lifecycles": [
       {
         "phase": "pre-build"
@@ -19,7 +19,7 @@
     "component": {
       "type": "library",
       "mime-type": "text/plain",
-      "bom-ref": "pkg:raku/zef:lizmat/JSON::Collector@0.0.4",
+      "bom-ref": "pkg:raku/zef:lizmat/JSON::Collector@0.0.5",
       "authors": [
         {
           "bom-ref": "ElizabethMattijsen",
@@ -29,7 +29,7 @@
       "publisher": "zef",
       "group": "zef:lizmat",
       "name": "JSON::Collector",
-      "version": "0.0.4",
+      "version": "0.0.5",
       "description": "Collect and process JSON",
       "scope": "required",
       "licenses": [
@@ -41,14 +41,14 @@
           }
         }
       ],
-      "purl": "pkg:raku/zef:lizmat/JSON::Collector@0.0.4",
+      "purl": "pkg:raku/zef:lizmat/JSON::Collector@0.0.5",
       "externalReferences": [
         {
           "url": "https://codeberg.org/lizmat/JSON-Collector",
           "type": "distribution"
         },
         {
-          "url": "https://raku.land/zef:lizmat/JSON::Collector?v=0.0.4",
+          "url": "https://raku.land/zef:lizmat/JSON::Collector?v=0.0.5",
           "type": "documentation"
         },
         {
@@ -83,7 +83,7 @@
         {
           "type": "library",
           "mime-type": "text/plain",
-          "bom-ref": "pkg:raku/zef:lizmat/SBOM::Raku@0.0.13",
+          "bom-ref": "pkg:raku/zef:lizmat/SBOM::Raku@0.0.14",
           "authors": [
             {
               "bom-ref": "ElizabethMattijsen",
@@ -93,7 +93,7 @@
           "publisher": "zef",
           "group": "zef:lizmat",
           "name": "SBOM::Raku",
-          "version": "0.0.13",
+          "version": "0.0.14",
           "description": "Raku specific SBOM functionality",
           "scope": "required",
           "licenses": [
@@ -105,27 +105,23 @@
               }
             }
           ],
-          "purl": "pkg:raku/zef:lizmat/SBOM::Raku@0.0.13",
+          "purl": "pkg:raku/zef:lizmat/SBOM::Raku@0.0.14",
           "externalReferences": [
             {
-              "url": "https://github.com/lizmat/SBOM-Raku",
+              "url": "https://codeberg.org/lizmat/SBOM-Raku",
               "type": "distribution"
             },
             {
-              "url": "https://raku.land/zef:lizmat/SBOM::Raku?v=0.0.13",
+              "url": "https://raku.land/zef:lizmat/SBOM::Raku?v=0.0.14",
               "type": "documentation"
             },
             {
-              "url": "https://github.com/lizmat/SBOM-Raku/issues",
+              "url": "https://codeberg.org/lizmat/SBOM-Raku/issues",
               "type": "issue-tracker"
             },
             {
               "url": "https://spdx.org/licenses/Artistic-2.0.json",
               "type": "license"
-            },
-            {
-              "url": "https://github.com/lizmat/SBOM-Raku/archive/refs/tags/0.0.13.zip",
-              "type": "source-distribution"
             },
             {
               "url": "mailto:liz@raku.rocks",
@@ -154,7 +150,7 @@
       "publisher": "Rakudo Core Developers",
       "group": "Rakudo Core Developers",
       "name": "Rakudo",
-      "version": "2026.06-28-g4b68e9471",
+      "version": "2026.08-433-gb83057b10",
       "description": "The Rakudo™ Compiler implementing the Raku® Programming Language",
       "scope": "required",
       "licenses": [
@@ -177,7 +173,7 @@
           "type": "issue-tracker"
         },
         {
-          "url": "https://github.com/rakudo/rakudo/archive/4b68e9471.zip",
+          "url": "https://github.com/rakudo/rakudo/archive/b83057b10.zip",
           "type": "source-distribution"
         },
         {
@@ -198,7 +194,7 @@
       "publisher": "The MoarVM Team",
       "group": "The MoarVM Team",
       "name": "Moar",
-      "version": "2026.06",
+      "version": "2026.08-9-gebc3f7069",
       "description": "Short for \"Metamodel On A Runtime\", MoarVM is a modern virtual machine built for the Rakudo compiler and the NQP Compiler Toolchain.",
       "scope": "required",
       "licenses": [
@@ -225,7 +221,7 @@
           "type": "chat"
         },
         {
-          "url": "https://github.com/MoarVM/MoarVM.git/archive/refs/tags/2026.06.zip",
+          "url": "https://github.com/MoarVM/MoarVM.git/archive/refs/tags/ebc3f7069.zip",
           "type": "source-distribution"
         }
       ]
@@ -233,7 +229,7 @@
     {
       "type": "library",
       "mime-type": "text/plain",
-      "bom-ref": "pkg:raku/zef:timo/JSON::Fast?vers=vers:raku/%3E=0.20.1",
+      "bom-ref": "pkg:raku/zef:timo/JSON::Fast?vers=vers:raku/%3E=0.21",
       "authors": [
         {
           "bom-ref": "TimoPaulssen",
@@ -255,7 +251,7 @@
       "publisher": "zef",
       "group": "zef:timo",
       "name": "JSON::Fast",
-      "version": "0.20.1",
+      "version": "0.21.0",
       "description": "A naive, fast json parser and serializer; drop-in replacement for JSON::Tiny",
       "scope": "required",
       "licenses": [
@@ -267,14 +263,14 @@
           }
         }
       ],
-      "purl": "pkg:raku/zef:timo/JSON::Fast@0.20.1",
+      "purl": "pkg:raku/zef:timo/JSON::Fast@0.21.0",
       "externalReferences": [
         {
           "url": "git://github.com/timo/json_fast",
           "type": "distribution"
         },
         {
-          "url": "https://raku.land/zef:timo/JSON::Fast?v=0.20.1",
+          "url": "https://raku.land/zef:timo/JSON::Fast?v=0.21.0",
           "type": "documentation"
         },
         {
@@ -290,7 +286,7 @@
       "type": "distribution"
     },
     {
-      "url": "https://raku.land/zef:lizmat/JSON::Collector?v=0.0.4",
+      "url": "https://raku.land/zef:lizmat/JSON::Collector?v=0.0.5",
       "type": "documentation"
     },
     {
@@ -314,13 +310,13 @@
       ]
     },
     {
-      "ref": "pkg:raku/zef:lizmat/SBOM::Raku@0.0.13",
+      "ref": "pkg:raku/zef:lizmat/SBOM::Raku@0.0.14",
       "dependsOn": [
         "Rakudo"
       ]
     },
     {
-      "ref": "pkg:raku/zef:timo/JSON::Fast?vers=vers:raku/%3E=0.20.1"
+      "ref": "pkg:raku/zef:timo/JSON::Fast?vers=vers:raku/%3E=0.21"
     }
   ]
 }

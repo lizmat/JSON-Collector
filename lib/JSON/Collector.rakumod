@@ -1,6 +1,6 @@
 use v6.*;  # want nano()
 
-use JSON::Fast:ver<0.20.1+>:auth<zef:timo>;
+use JSON::Fast:ver<0.21+>:auth<zef:timo>;
 
 #- JSON::Collector::Item -------------------------------------------------------
 # Class to handle a single data item
